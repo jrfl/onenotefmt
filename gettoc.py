@@ -66,12 +66,16 @@ def mungeData(h):
                         {'id': 'libraryMemberFilterEmptyWarning'}):
         i.extract()
 
+    for i in h.find_all(attrs={"xmlns": True}):
+        del i.attrs["xmlns"]
+
 
 def writeData(filename, soup):
     global pat
     global substs
     global replace
 
+    filename = filename.replace(".aspx", ".html")
     with open(dspathmkpath + "/" + filename, "w") as f:
         soup = soup.find_all('div', {"class": "content"})[0]
         mungeData(soup)
@@ -85,6 +89,10 @@ def linkFinder(links, bsoup):
     for i in items:
         for x in i.findAll('a'):
             links.append(x['href'])
+
+
+def replace(m):
+    return m.group(0).split("/")[-1].replace(".aspx", ".html")
 
 
 maxRetry = 10
@@ -149,7 +157,6 @@ pat = "|".join('(%s)' % re.escape(pth + p.split("/")[-1])
                for p in results.keys())
 
 substs = [p.split("/")[-1] for p in results.keys()]
-replace = lambda m: substs[m.lastindex - 1]
 
 for k, i in results.items():
     d = results[k]

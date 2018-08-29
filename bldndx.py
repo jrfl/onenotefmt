@@ -6,7 +6,8 @@ import sqlite3
 from bs4 import BeautifulSoup as bs4
 from config import db_file
 
-ndxfile = "dd953044(v=office.12).aspx"
+# ndxfile = "dd953044(v=office.12).aspx"
+ndxfile = "dd953044(v=office.12).html"
 
 conn = sqlite3.connect(db_file)
 cur = conn.cursor()
@@ -39,7 +40,6 @@ for tag in soup.find_all('a', {'href': any}):
         continue
 
     if namel.find("structure") > -1:
-        # name = name.replace("structure", "").strip()
         kind = 'Struct'
     elif namel.find("array") > -1:
         kind = 'Type'
@@ -81,13 +81,8 @@ for tag in soup.find_all('a', {'href': any}):
         kind = 'Guide'
     elif namel.find("overview") > -1:
         kind = 'Guide'
-#    elif namel.find("jcid") == 0:
-#        kind = 'Type'
-#    elif namel.find("node") > -1:
-#        kind = 'Type'
     else:
         kind = 'Type'
-        # print("Different Type:", name)
 
     if len(name) > 1:
         path = "./" + tag.attrs['href'].strip()
