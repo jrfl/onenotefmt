@@ -10,6 +10,7 @@ Thanks to the folks who shared their work pubically as it made this a fairly eas
 
 References:
 https://kapeli.com/docsets
-https://raw.githubusercontent.com/drbraden/pgdash/master/pgdoc2set.py
-https://msdn.microsoft.com/en-us/library/dd924743(v=office.12).aspx
 
+https://raw.githubusercontent.com/drbraden/pgdash/master/pgdoc2set.py
+
+https://msdn.microsoft.com/en-us/library/dd924743(v=office.12).aspx
